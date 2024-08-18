@@ -55,6 +55,7 @@ echo ---------------------------------------------------------------
 
 :: Install dependencies
 echo Installing dependencies...
+python.exe -m pip install --upgrade pip
  pip install --upgrade --force-reinstall --no-cache-dir torch==2.3.0 --index-url https://download.pytorch.org/whl/cu121
  pip install bitsandbytes
  pip install xformers
