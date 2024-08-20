@@ -55,13 +55,20 @@ echo ---------------------------------------------------------------
 
 :: Install dependencies
 echo Installing dependencies...
-python.exe -m pip install --upgrade pip
-pip install --upgrade --force-reinstall --no-cache-dir torch==2.3.0 --index-url https://download.pytorch.org/whl/cu121
-pip install bitsandbytes
-pip install xformers
-pip install numpy --upgrade --force-reinstall --no-cache-dir
-pip install unsloth[colab-new]
-:: pip install unsloth
+:: python.exe -m pip install --upgrade pip
+pip install --upgrade pip
+pip install --upgrade --force-reinstall --no-cache-dir torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+pip install "unsloth[cu121-torch240] @ git+https://github.com/unslothai/unsloth.git"
+:: pip install --upgrade --force-reinstall --no-cache-dir torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+:: pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+:: pip install --upgrade pip
+:: pip install "unsloth[cu121-torch220] @ git+https://github.com/unslothai/unsloth.git"
+:: pip install --no-deps xformers "trl<0.9.0" peft accelerate bitsandbytes
+:: pip install "unsloth[cu121] @ git+https://github.com/unslothai/unsloth.git"
+:: pip install bitsandbytes
+:: pip install xformers --upgrade --force-reinstall --no-cache-dir
+:: pip install numpy --upgrade --force-reinstall --no-cache-dir
+:: pip install unsloth[colab-new]
 
 :: Launch
 echo Launching...
