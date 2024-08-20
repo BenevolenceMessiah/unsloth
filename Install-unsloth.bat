@@ -55,8 +55,8 @@ echo ---------------------------------------------------------------
 
 :: Install dependencies
 echo Installing dependencies...
-:: python.exe -m pip install --upgrade pip
-pip install --upgrade pip
+python.exe -m pip install --upgrade pip
+:: pip install --upgrade pip
 pip install --upgrade --force-reinstall --no-cache-dir torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
 pip install "unsloth[cu121-torch240] @ git+https://github.com/unslothai/unsloth.git"
 :: pip install --upgrade --force-reinstall --no-cache-dir torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
