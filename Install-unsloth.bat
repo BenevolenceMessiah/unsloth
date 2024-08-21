@@ -57,7 +57,12 @@ echo ---------------------------------------------------------------
 echo Installing dependencies...
 python.exe -m pip install --upgrade pip
 :: pip install --upgrade pip
+:: pip install numpy==<2.0.0,>=1.17
+:: pip install numpy==2.0 --force-reinstall --no-cache-dir
+pip install --no-deps xformers "trl<0.9.0" peft accelerate bitsandbytes
 pip install --upgrade --force-reinstall --no-cache-dir torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
+pip install --no-deps xformers "trl<0.9.0" peft accelerate bitsandbytes
+:: pip install numpy --upgrade --force-reinstall --no-cache-dir
 pip install "unsloth[cu121-torch240] @ git+https://github.com/unslothai/unsloth.git"
 :: pip install --upgrade --force-reinstall --no-cache-dir torch==2.4.0 --index-url https://download.pytorch.org/whl/cu121
 :: pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
