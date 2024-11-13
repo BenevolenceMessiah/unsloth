@@ -53,17 +53,23 @@ pass
 # Reduce VRAM usage by reducing fragmentation
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
-try:
-    import torch
-except:
-    raise ImportError("Pytorch is not installed. Go to https://pytorch.org/.\n"\
-                      "We have some installation instructions on our Github page.")
+# Hugging Face Hub faster downloads
+if "HF_HUB_ENABLE_HF_TRANSFER" not in os.environ:
+    os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 pass
 
-# Hugging Face Hub faster downloads (only enable during Colab and Kaggle sessions)
-keynames = "\n" + "\n".join(os.environ.keys())
-if "\nCOLAB_"  in keynames or "\nKAGGLE_" in keynames:
-    os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
+# Log Unsloth is being used
+os.environ["UNSLOTH_IS_PRESENT"] = "1"
+
+try:
+    import torch
+except ModuleNotFoundError:
+    raise ImportError(
+        "Unsloth: Pytorch is not installed. Go to https://pytorch.org/.\n"\
+        "We have some installation instructions on our Github page."
+    )
+except Exception as exception:
+    raise exception
 pass
 
 # We support Pytorch 2
@@ -124,7 +130,7 @@ if "SPACE_AUTHOR_NAME" not in os.environ and "SPACE_REPO_NAME" not in os.environ
 
             # Try linking cuda folder, or everything in local
             if len(possible_cudas) == 0:
-                os.system(f"ldconfig /usr/local/")
+                os.system("ldconfig /usr/local/")
             else:
                 find_number = re.compile(r"([\d\.]{2,})")
                 latest_cuda = np.argsort([float(find_number.search(x).group(1)) for x in possible_cudas])[::-1][0]
@@ -152,6 +158,13 @@ if "SPACE_AUTHOR_NAME" not in os.environ and "SPACE_REPO_NAME" not in os.environ
                 "Unsloth will still run for now, but maybe it might crash - let's hope it works!"
             )
     pass
+pass
+
+# Check for unsloth_zoo
+try:
+    import unsloth_zoo
+except:
+    raise ImportError("Unsloth: Please install unsloth_zoo via `pip install unsloth-zoo`")
 pass
 
 from .models import *
